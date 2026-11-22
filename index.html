@@ -9,26 +9,29 @@
 body{font-family:Heebo,sans-serif;font-size:var(--tx);line-height:1.65;background:var(--bg);color:var(--tx-c);-webkit-font-smoothing:antialiased}
 .in{max-width:560px;margin:0 auto;padding:0 20px}
 .hero{text-align:center;padding:14px 0 28px}
+.id{display:flex;align-items:center;justify-content:center;gap:10px}.id img{width:44px;height:44px;border-radius:50%;object-fit:cover}
 .name{font-family:Rubik;font-weight:900;font-size:26px;line-height:1;letter-spacing:.5px}
 .who{display:inline-block;margin-top:10px;background:var(--s);padding:8px 16px;font-size:16px;line-height:1.4;color:#d9dde4}
 h1{font-family:Rubik;font-weight:900;font-size:var(--h1);line-height:1.08;margin-top:14px}
 h1 span{color:var(--ac)}
 .obj{margin-top:8px;font-size:16px;color:var(--mut)}
-.vb{margin:14px auto 0;width:100%;aspect-ratio:1/1;background:#000}
-.vb video{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block}
+.vb{margin:14px auto 0;width:100%;aspect-ratio:6/5;background:#000}
+.vb video{width:100%;height:100%;object-fit:cover;object-position:center 45%;display:block}
 .ask{margin-top:14px;font-weight:900;font-size:17px}
-.chips{display:flex;gap:6px;justify-content:center;margin-top:10px}
-.chips button{flex:1;font:900 15px Heebo,sans-serif;border:2px solid #3a4150;background:none;color:var(--tx-c);padding:10px 4px;cursor:pointer}
+.chips{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px}
+.chips button{flex:1;font:900 15px Heebo,sans-serif;border:2px solid #3a4150;background:none;color:var(--tx-c);padding:9px 4px;cursor:pointer}
 .chips button[aria-pressed=true]{background:var(--tx-c);color:var(--bg);border-color:var(--tx-c)}
 .btn{display:block;width:100%;margin-top:12px;text-align:center;font:900 19px Heebo,sans-serif;line-height:1.2;padding:19px 16px;background:var(--ac);color:#08111a;border:0;cursor:pointer}
 .fl{position:fixed;bottom:14px;left:14px;right:14px;max-width:532px;margin:0 auto;z-index:5;transition:opacity .3s,transform .3s}
 .fl.off{opacity:0;transform:translateY(20px);pointer-events:none}
 .work{background:var(--s);padding:48px 0}
 .work h2{font-family:Rubik;font-weight:900;font-size:var(--h2);line-height:1.1}
-.work .row{display:flex;gap:16px;align-items:flex-end;margin-top:20px}
-.work video{width:58%;aspect-ratio:9/16;object-fit:cover;background:#000;display:block}
-.work b{display:block;font-size:20px;line-height:1.25}
-.work p{color:var(--mut);font-size:16px;margin-top:6px}
+.strip{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;margin:20px -20px 0;padding:0 20px 8px}
+.strip figure{flex:0 0 62%;scroll-snap-align:start}
+.strip video{width:100%;aspect-ratio:9/16;object-fit:cover;background:#000;display:block;cursor:pointer}
+.strip b{display:block;font-size:18px;line-height:1.25;margin-top:8px}
+.strip span{color:var(--mut);font-size:15px}
+.work .hint{color:var(--mut);font-size:16px;margin-top:8px}
 .me{display:flex;gap:14px;align-items:center;padding:40px 0 120px}
 .me img{width:96px;height:120px;object-fit:cover;object-position:center 20%}
 .me p{font-size:17px}.me small{display:block;color:var(--mut);font-size:14px;margin-top:6px}
@@ -37,37 +40,38 @@ h1 span{color:var(--ac)}
 @media(prefers-reduced-motion:reduce){.fl,#toast{transition:none}}
 </style></head><body>
 <header class="hero"><div class="in">
-<p class="name">בראל לוי</p>
+<div class="id"><img src="v/barel-face.jpg" alt="בראל לוי" width="44" height="44"><p class="name">בראל לוי</p></div>
 <p class="who">תסריט, צילום, עריכה ווידאו AI לבעלי עסקים</p>
 <h1>להפסיק לשרוף זמן על תוכן שלא עובד, <span>ולהתחיל לקבל ממנו לידים</span></h1>
 <p class="obj">לא חייב להיות עם 10k עוקבים כדי להיראות כמו מותג</p>
 <div class="vb"><video id="sv" src="v/testi.mp4" poster="v/testi.jpg" controls muted playsinline preload="metadata" aria-label="לקוחות של בראל מספרים על העבודה איתו, עם כתוביות"></video></div>
-<p class="ask" id="ask">איזה עסק יש לך?</p>
-<div class="chips" role="group" aria-labelledby="ask"><button type="button" data-k="barber" data-n="מספרה" data-cap="ריל לאלונסו ברברשופ" aria-pressed="true">מספרה</button><button type="button" data-k="gym" data-n="סטודיו כושר" data-cap="ריל לסטודיו AY" aria-pressed="false">כושר</button><button type="button" data-k="event" data-n="אירוע או פודקאסט" data-cap="צילומים באירועים ובפודקאסטים" aria-pressed="false">אירועים</button><button type="button" data-k="office" data-n="עסק" data-cap="יום צילום במשרד" aria-pressed="false">אחר</button></div>
-<button class="btn go" id="go" type="button">יש לי מספרה, לשלוח לבראל</button>
+<p class="ask" id="ask">מה הכי תוקע אותך עם התוכן?</p>
+<div class="chips" role="group" aria-labelledby="ask"><button type="button" data-m="אני לא יודע מה להעלות" aria-pressed="false">לא יודע מה להעלות</button><button type="button" data-m="קשה לי מול המצלמה" aria-pressed="false">מפחד מהמצלמה</button><button type="button" data-m="אני מעלה תוכן ולא מקבל ממנו פניות" aria-pressed="false">מעלה ואין פניות</button><button type="button" data-m="אין לי זמן לצלם ולערוך" aria-pressed="false">אין לי זמן לזה</button></div>
+<button class="btn go" id="go" type="button">לקבל תוכן שמביא לידים</button>
 </div></header>
 <section class="work" aria-labelledby="wt"><div class="in">
-<h2 id="wt">מה בראל עשה לעסק כמו שלך</h2>
-<div class="row"><video id="wv" src="v/barber.mp4" poster="v/barber.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
-<div><b id="wn">ריל לאלונסו ברברשופ</b><p>בחרו סוג עסק למעלה, והעבודה כאן מתחלפת</p></div></div>
+<h2 id="wt">עבודות לכל סוג עסק</h2><p class="hint">נגיעה בסרטון מפעילה אותו</p>
+<div class="strip"><figure><video src="v/barber.mp4" poster="v/barber.jpg" muted loop playsinline preload="none" aria-label="אלונסו ברברשופ"></video><figcaption><b>אלונסו ברברשופ</b><span>מספרה</span></figcaption></figure><figure><video src="v/gym.mp4" poster="v/gym.jpg" muted loop playsinline preload="none" aria-label="סטודיו AY"></video><figcaption><b>סטודיו AY</b><span>סטודיו כושר</span></figcaption></figure><figure><video src="v/event.mp4" poster="v/event.jpg" muted loop playsinline preload="none" aria-label="אירועים ופודקאסטים"></video><figcaption><b>אירועים ופודקאסטים</b><span>צילום באירוע</span></figcaption></figure><figure><video src="v/office.mp4" poster="v/office.jpg" muted loop playsinline preload="none" aria-label="יום צילום במשרד"></video><figcaption><b>יום צילום במשרד</b><span>עסק</span></figcaption></figure></div>
 </div></section>
 <section class="in me"><img src="v/barel.jpg" alt="בראל לוי"><p>אתה יכול להיות הכי מקצוען בתחום שלך, אבל אם ברשת זה לא נראה ככה, הלקוח לא באמת מרגיש את זה.<small>בראל לוי</small></p></section>
-<button class="btn fl off go" id="fl" type="button">יש לי מספרה, לשלוח לבראל</button>
+<button class="btn fl off go" id="fl" type="button">לקבל תוכן שמביא לידים</button>
 <p class="in" style="padding-bottom:110px;font-size:14px;color:#6b7280">טיוטה. נבנה על ידי Next Point</p>
 <div id="toast" role="status"></div>
 <script>
 (function(){
  var RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
- var go=document.querySelectorAll('.go'),wv=document.getElementById('wv'),wn=document.getElementById('wn'),cur='מספרה';
- function label(n){return n==='עסק'?'יש לי עסק, לשלוח לבראל':'יש לי '+n+', לשלוח לבראל'}
+ var go=document.querySelectorAll('.go'),pain='';
  document.querySelectorAll('.chips button').forEach(function(b){b.addEventListener('click',function(){
+  var on=b.getAttribute('aria-pressed')==='true';
   document.querySelectorAll('.chips button').forEach(function(x){x.setAttribute('aria-pressed','false')});
-  b.setAttribute('aria-pressed','true');cur=b.dataset.n;
-  go.forEach(function(g){g.textContent=label(cur)});
-  wv.poster='v/'+b.dataset.k+'.jpg';wv.src='v/'+b.dataset.k+'.mp4';wn.textContent=b.dataset.cap;if(!RM)wv.play().catch(function(){});
+  if(!on){b.setAttribute('aria-pressed','true');pain=b.dataset.m}else pain='';
+ })});
+ var vids=[].slice.call(document.querySelectorAll('.strip video'));
+ vids.forEach(function(x){x.addEventListener('click',function(){
+  if(x.paused){vids.forEach(function(y){if(y!==x)y.pause()});x.play().catch(function(){})}else x.pause();
  })});
  go.forEach(function(g){g.addEventListener('click',function(){
-  var msg='היי בראל, הגעתי מהאתר. יש לי '+cur+' ואני רוצה תוכן שמביא לידים',t=document.getElementById('toast');
+  var msg='היי בראל, הגעתי מהאתר. '+(pain?pain+'. ':'')+'אשמח לשמוע איך אתה יכול לעזור לי לקבל לידים מהתוכן',t=document.getElementById('toast');
   (navigator.clipboard?navigator.clipboard.writeText(msg):Promise.reject()).then(function(){t.textContent='ההודעה הועתקה. מדביקים אותה בהודעה לבראל'},function(){t.textContent=msg}).finally(function(){
    t.classList.add('on');setTimeout(function(){t.classList.remove('on');window.open('https://ig.me/m/barellevi_','_blank')},1400)});
  })});
@@ -76,7 +80,6 @@ h1 span{color:var(--ac)}
  var v=document.getElementById('sv'),started=false,auto=false;
  v.addEventListener('pause',function(){if(!auto)started=true;auto=false});
  new IntersectionObserver(function(es){if(es[0].isIntersecting){if(!started&&!RM){started=true;v.play().catch(function(){})}}else if(!v.paused&&!document.fullscreenElement){auto=true;v.pause();started=false}},{threshold:.35}).observe(v);
- new IntersectionObserver(function(es){if(es[0].isIntersecting){if(!RM)wv.play().catch(function(){})}else wv.pause()},{threshold:.3}).observe(wv);
  /* כפתור צף: מוסתר כשהכפתור הראשי או הסרטון על המסך */
  var fl=document.getElementById('fl'),seen={};
  var io=new IntersectionObserver(function(es){es.forEach(function(e){seen[e.target.id]=e.isIntersecting});fl.classList.toggle('off',!!(seen.go||seen.sv))});
